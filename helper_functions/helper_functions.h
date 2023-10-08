@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 01:03:03 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/07 01:53:28 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:13:39 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		ft_check_argc(int argc, char **argv);
 int		ft_print_actions(int n);
 int		ft_print_error(void);
 void	ft_set_head_node(t_list **stack);
-
+t_list	*ft_lstnew(int value);
+void	ft_lstadd_back(t_list **stack, t_list *new);
 
 #endif

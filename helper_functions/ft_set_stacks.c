@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:39:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/07 01:58:00 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:37:08 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_set_head_node(t_list **stack)
 // 	if (!new_node)
 // 		return NULL;
 // 	new_node->value = value;
-// 	new_node->index = -1; // 
+// 	new_node->index = -1; //
 // 	new_node->next = NULL;
 // 	return new_node;
 // }

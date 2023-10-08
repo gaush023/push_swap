@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 02:36:23 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/07 01:34:00 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:54:28 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	malloc_stacks(t_list ***stack_a, t_list ***stack_b)
 	return (0);
 }
 
-static void	create_stack(t_list **stack, int argc, char **argv)
+static void	create_stacks(t_list **stack, int argc, char **argv)
 {
 	t_list	*new;
 	char	*args;
@@ -60,4 +60,6 @@ int	main(int argc, char *argv[])
 		return (ft_print_error());
 	if (malloc_stacks(&stack_a, &stack_b) == -1)
 		return (ft_print_error());
+	create_stacks(*stack_a, argc, argv);
+	
 }
