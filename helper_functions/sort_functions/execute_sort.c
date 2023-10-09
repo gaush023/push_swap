@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pb.c                                               :+:      :+:    :+:   */
+/*   execute_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 17:26:32 by sagemura          #+#    #+#             */
-/*   Updated: 2023/08/16 10:05:36 by sagemura         ###   ########.fr       */
+/*   Created: 2023/10/09 22:16:16 by sagemura          #+#    #+#             */
+/*   Updated: 2023/10/10 03:48:43 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "sort_functions.h"
 
-int	pb(t_node **stack_a, t_node **stack_b)
+void	execute_sort(t_list **stack_a, t_list **stack_b)
 {
-	t_node	*tmp;
-
-	if (*stack_a == NULL)
-		return (-1);
-	tmp = *stack_a;
-	*stack_a = (*stack_a)->next;
-	tmp->next = *stack_b;
-	*stack_b = tmp;
-    
-	return (0);
+	if (ft_lstsize(*stack_a) < 4)
+		magic_sort_3(stack_a);
+	else
+		sort_bigstacks(stack_a, stack_b);
 }

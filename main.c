@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 02:36:23 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/09 03:05:49 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/10 02:10:44 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ static void	create_stacks(t_list **stack, int argc, char **argv)
 		free_split(args);
 }
 
+void print_stack(t_list **stack)
+{
+	t_list *current_node;
+
+	if (!stack || !*stack)
+	{
+		printf("Stack is empty.\n");
+		return;
+	}
+
+	current_node = *stack;
+	while (current_node != NULL)
+	{
+		printf("%d\n", current_node->value);
+		current_node = current_node->next;
+	}
+}
+
 
 int	main(int argc, char *argv[])
 {
@@ -65,13 +83,16 @@ int	main(int argc, char *argv[])
 	if (malloc_stacks(&stack_a, &stack_b) == -1)
 		return (ft_print_error());
 	create_stacks(stack_a, argc, argv);
+	print_stack(stack_a);
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
 		free_stack(stack_b);
 		return (0);
 	}
+	printf("+++++++++++++++++\n");
 	execute_sort(stack_a, stack_b);
+	print_stack(stack_a);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

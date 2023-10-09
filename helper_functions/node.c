@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:43:50 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/09 01:30:32 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/10 01:08:52 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_list	*mv_lsat(t_list *head)
 	tmp = head;
 	while (tmp->next)
 	{
-		tmp = tmp->next;
 		if (tmp->next == NULL)
 			return (tmp);
+		tmp = tmp->next;
 	}
 	return (tmp);
 }
@@ -54,4 +54,19 @@ void	ft_lstadd_back(t_list **stack, t_list *new)
 		*stack = new;
 		(*stack)->next = NULL;
 	}
+}
+
+int	ft_lstsize(t_list *stack)
+{
+	int	i;
+
+	if (!stack)
+		return (-1);
+	i = 0;
+	while (stack)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
 }
