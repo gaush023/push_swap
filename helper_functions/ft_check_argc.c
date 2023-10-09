@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_error.c                                   :+:      :+:    :+:   */
+/*   ft_check_argc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:30:42 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/03 04:28:50 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/09 02:46:20 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ static int	ft_help_check_argc(long tmp, char **args, int i)
 	return (0);
 }
 
-static void	ft_free(int i, char **args)
-{
-	while (i >= 0 && args[i] != 0)
-		free(args[i--]);
-	free(args);
-}
 
 int	ft_check_argc(int argc, char **argv)
 {
@@ -95,7 +89,7 @@ int	ft_check_argc(int argc, char **argv)
 		i++;
 	}
 	if (argc == 2)
-		ft_free(i, args);
+		free_split(args);
 	return (0);
 }
 

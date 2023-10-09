@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:43:50 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/08 15:10:14 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/09 01:30:32 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*ft_lstnew(int value)
 	return (new);
 }
 
-static t_list	*mv_lsat(t_list *head)
+t_list	*mv_lsat(t_list *head)
 {
 	t_list	*tmp;
 

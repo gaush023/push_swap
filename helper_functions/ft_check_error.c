@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:30:42 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/05 20:30:30 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/09 02:26:26 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ static int	ft_help_check_argc(long tmp, char **args, int i)
 	return (0);
 }
 
-static void	ft_free(int i, char **args)
-{
-	while (i >= 0 && args[i] != 0)
-		free(args[i--]);
-	free(args);
-}
 
 int	ft_check_argc(int argc, char **argv)
 {
@@ -78,9 +72,7 @@ int	ft_check_argc(int argc, char **argv)
 	char	**args;
 
 	i = 0;
-	if (argc < 2)
-		return (-1);
-	else if (argc == 2)
+	if (argc == 2)
 		args = ft_split(argv[1], ' ');
 	else
 	{
@@ -95,7 +87,7 @@ int	ft_check_argc(int argc, char **argv)
 		i++;
 	}
 	if (argc == 2)
-		ft_free(i, args);
+		free_split(args);
 	return (0);
 }
 

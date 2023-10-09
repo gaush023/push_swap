@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 12:38:03 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/09 02:48:44 by sagemura         ###   ########.fr       */
+/*   Created: 2023/10/09 02:13:57 by sagemura          #+#    #+#             */
+/*   Updated: 2023/10/09 02:34:54 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "helper_functions.h"
 
-# include "helper_functions/helper_functions.h"
-# include "helper_functions/libft/libft.h"
-# include "list.h"
-# include <limits.h>
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	free_split(char **args)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (args[i])
+		i++;
+	while (i >= 0 && args[i] != 0)
+		free(args[i--]);
+	free(args);
+}

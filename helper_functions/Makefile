@@ -6,13 +6,13 @@
 #    By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 00:17:25 by sagemura          #+#    #+#              #
-#    Updated: 2023/10/09 01:56:04 by sagemura         ###   ########.fr        #
+#    Updated: 2023/10/09 02:32:20 by sagemura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-SRCS =       ft_memcpy.c     ft_strchr.c  ft_putendl_fd.c  \
-ft_atoi.c       ft_isnum.c      ft_split.c      ft_strlen.c  ft_strcmp.c 
+NAME = helper_functions.a
+SRCS =   free_split.c   free_stacks.c ft_check_argc.c ft_check_error.c \
+ft_print_error.c ft_set_stacks.c is_sorted.c node.c
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
