@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:43:50 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/10 01:08:52 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:09:35 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*ft_lstnew(int value)
 	return (new);
 }
 
-t_list	*mv_lsat(t_list *head)
+t_list	*mv_last(t_list *head)
 {
 	t_list	*tmp;
 
@@ -45,7 +45,7 @@ void	ft_lstadd_back(t_list **stack, t_list *new)
 
 	if (*stack)
 	{
-		tmp = mv_lsat(*stack);
+		tmp = mv_last(*stack);
 		tmp->next = new;
 		new->next = NULL;
 	}
@@ -69,4 +69,34 @@ int	ft_lstsize(t_list *stack)
 		i++;
 	}
 	return (i);
+}
+
+int	main(void)
+{
+	t_list *list = NULL;
+
+	// リストにノードを追加
+	ft_lstadd_back(&list, 10);
+	ft_lstadd_back(&list, 20);
+	ft_lstadd_back(&list, 30);
+
+	// 2番目のノードにアクセス
+	t_list *second_node = list->next;
+
+	// 2番目のノードのpreメンバを使用して、前のノードのvalueを表示
+	if (second_node->pre)
+		printf("The value of the previous node is: %d\n",
+				second_node->pre->value);
+	else
+		printf("There is no previous node.\n");
+
+	// メモリの解放
+	while (list)
+	{
+		t_list *temp = list;
+		list = list->next;
+		free(temp);
+	}
+
+	return (0);
 }
