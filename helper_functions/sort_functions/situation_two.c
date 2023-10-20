@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/18 20:37:42 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:12:05 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value,
 		if ((*stack_a)->value > (*stack_b)->value
 			&& (*stack_a)->value < bottom_b_value)
 			ft_pb(stack_a, stack_b);
+		bottom_b_value = (*stack_b)->value;
 		ft_rr(*stack_a, stack_b);
 	}
 }
