@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 00:54:00 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/19 18:51:07 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:51:52 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_ss(t_list **stack_a, t_list **stack_b)
 	(*stack_a)->next = second;
 	second = *stack_b;
 	*stack_b = (*stack_b)->next;
+	second->next = (*stack_b)->next;
 	(*stack_b)->next = second;
 	write(1, "ss\n", 3);
 }
@@ -71,11 +72,11 @@ void	ft_pb(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
 
-	if (!*stack_b)
+	if (!*stack_a)
 		return ;
-	tmp = *stack_b;
-	*stack_b = *stack_a;
+	tmp = *stack_a;
 	*stack_a = (*stack_a)->next;
-	(*stack_b)->next = tmp;
+	tmp->next = *stack_b;
+	*stack_b = tmp;
 	write(1, "pb\n", 3);
 }

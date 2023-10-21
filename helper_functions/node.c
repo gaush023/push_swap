@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:43:50 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/21 07:52:09 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:20:18 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ void	ft_lstadd_back(t_list **stack, t_list *new)
 	}
 }
 
-int	ft_lstsize(t_list *stack)
+int	ft_lstsize(t_list **stack)
 {
-	int	i;
+	int		i;
+	t_list	*tmp;
 
-	if (!stack)
-		return (-1);
+	tmp = *stack;
 	i = 0;
-	while (stack)
+	while (tmp)
 	{
-		stack = stack->next;
+		tmp = tmp->next;
 		i++;
 	}
 	return (i);
