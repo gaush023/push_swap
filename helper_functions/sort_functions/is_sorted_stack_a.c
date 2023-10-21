@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:03:09 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/19 23:13:26 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/19 23:33:29 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,29 @@
 
 int	is_sorted_stack_a(t_list **stack_a)
 {
-	int	n;
+	int		n;
+	t_list	*current;
 
+	current = *stack_a;
 	n = 0;
-	while ((*stack_a)->next)
+	while (current && current->next)
 	{
-		if ((*stack_a)->value < (*stack_a)->next->value)
-			while ((*stack_a)->value < (*stack_a)->next->value)
-				stack_a = (*stack_a)->next;
-		else if ((*stack_a)->value > (*stack_a)->next->value)
-			while ((*stack_a)->value > (*stack_a)->next->value)
-				stack_a = (*stack_a)->next;
-		n++;
+		if (current->value < current->next->value)
+		{
+			while (current->next && current->value < current->next->value)
+				current = current->next;
+			n++;
+		}
+		else if (current->value > current->next->value)
+		{
+			while (current->next && current->value > current->next->value)
+				current = current->next;
+			n++;
+		}
 		if (n > 2)
 			return (n);
+		if (current->next)
+			current = current->next;
 	}
 	return (n);
 }
