@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/21 17:45:43 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:07:02 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	initial_pos = (*stack_b)->value;
 	while ((*stack_a)->value < bottom_b_value)
 	{
+		if (ft_lstsize(stack_a) < 4)
+			return ;
 		while ((*stack_a)->value > (*stack_a)->next->value
 			&& (*stack_a)->next->value > (*stack_b)->value)
 		{
@@ -34,7 +36,9 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	}
 	while (initial_pos != (*stack_b)->value)
 	{
-		if ((*stack_a)->value < (*stack_a)->next->value)
+		if (ft_lstsize(stack_a) < 4)
+			return ;
+		if ((*stack_a)->value > (*stack_a)->next->value)
 			ft_sa(stack_a);
 		if ((*stack_a)->value > (*stack_b)->value
 			&& (*stack_a)->value < bottom_b_value)
@@ -42,4 +46,5 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 		bottom_b_value = (*stack_b)->value;
 		ft_rr(stack_a, stack_b);
 	}
+	printf("situation_two\n");
 }

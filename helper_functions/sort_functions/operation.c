@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 00:54:00 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/21 14:51:52 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/22 15:27:57 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	ft_pb(t_list **stack_a, t_list **stack_b)
 
 	if (!*stack_a)
 		return ;
-	tmp = *stack_a;
+	tmp = *stack_b;
+	*stack_b = *stack_a;
 	*stack_a = (*stack_a)->next;
-	tmp->next = *stack_b;
-	*stack_b = tmp;
+	(*stack_b)->next = tmp;
 	write(1, "pb\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:40:09 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/21 17:44:04 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:08:34 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ int	find_insertion_pos(int i_p, t_list **stack_b)
 void	situation_three(t_list **stack_a, t_list **stack_b, int bottom_b_value,
 		int bottom_a_value)
 {
-	if (find_insertion_pos((*stack_a)->value, stack_b) > ft_lstsize(*stack_b)
+	if (find_insertion_pos((*stack_a)->value, stack_b) > ft_lstsize(stack_b)
 		/ 2)
+	{
 		situation_three_type_a(stack_a, stack_b);
+		printf("situation_three_type_a\n");
+	}
 	else
+	{
 		situation_three_type_b(stack_a, stack_b, bottom_a_value,
-			bottom_b_value);
+				bottom_b_value);
+		printf("situation_three_type_b\n");
+	}
 }
