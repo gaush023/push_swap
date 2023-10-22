@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 02:36:23 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/22 17:22:17 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:31:52 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int	main(int argc, char *argv[])
 		return (ft_print_error());
 	if (malloc_stacks(&stack_a, &stack_b) == -1)
 		return (ft_print_error());
+	create_stacks(stack_a, argc, argv);
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
 		free_stack(stack_b);
 		return (0);
 	}
-	create_stacks(stack_a, argc, argv);
 	print_stack(stack_a);
 	printf("\n");
 	print_stack(stack_b);

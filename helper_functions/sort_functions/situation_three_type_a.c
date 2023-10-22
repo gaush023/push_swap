@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/21 14:57:57 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:39:53 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	situation_three_type_a(t_list **stack_a, t_list **stack_b)
 	while (ini_stackb_node != (*stack_b)->value)
 	{
 		stackb_bottom = mv_last(*stack_b)->value;
-		if ((*stack_a)->value > (*stack_b)->value
+		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
 			&& (*stack_a)->value < stackb_bottom)
 			ft_pb(stack_a, stack_b);
 		ft_rrb(stack_b);
