@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:30:42 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/22 20:29:12 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:57:56 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static int	check_digits(char **args, int i)
 	min_int_str = "-2147483648";
 	if (args[i][0] == '-')
 	{
-		if (ft_strlen(args[i]) > 11 || ft_strcmp(args[i], min_int_str) > 0)
+		if (ft_strlen(args[i]) > 11 && ft_strcmp(args[i], min_int_str) > 0)
+			return (1);
+		else if (ft_strlen(args[i]) == 11 && args[i][10] + '0' > 8)
 			return (1);
 	}
 	else if (args[i][0] == '+')
@@ -56,14 +58,22 @@ static int	check_digits(char **args, int i)
 static int	ft_help_check_argc(long tmp, char **args, int i)
 {
 	if (!ft_isnum(args[i]))
+	{
+		printf("isnum\n");
 		return (-1);
+	}
 	if (ft_check_duplication(tmp, args, i))
+	{
+		printf("duplication\n");
 		return (-1);
+	}
 	if (check_digits(args, i))
+	{
+		printf("digits\n");
 		return (-1);
+	}
 	return (0);
 }
-
 
 int	ft_check_argc(int argc, char **argv)
 {
@@ -93,13 +103,3 @@ int	ft_check_argc(int argc, char **argv)
 	return (0);
 }
 
-// #include <stdio.h>
-
-// int	main(int argc, char *argv[])
-// {
-// 	if (ft_check_argc(argc, argv) == -1)
-// 		printf("error");
-// 	else
-// 		printf("success");
-// 	return (0);
-// }

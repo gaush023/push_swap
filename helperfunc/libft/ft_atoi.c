@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:41:07 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/03 03:18:39 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:56:46 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,4 @@ int	ft_atoi(const char *str)
 	}
 	return (res * sign);
 }
+
