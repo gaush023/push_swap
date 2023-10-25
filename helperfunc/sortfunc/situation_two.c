@@ -6,11 +6,35 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/22 20:31:13 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:10:37 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sortfunc.h"
+
+static void	print_stacks(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*tmp_a;
+	t_list	*tmp_b;
+
+	tmp_a = *stack_a;
+	tmp_b = *stack_b;
+	printf("stack_a: ");
+	while (tmp_a)
+	{
+		printf("%d ", tmp_a->value);
+		tmp_a = tmp_a->next;
+	}
+	printf("\n");
+	printf("stack_b: ");
+	while (tmp_b)
+	{
+		printf("%d ", tmp_b->value);
+		tmp_b = tmp_b->next;
+	}
+	printf("\n");
+}
+
 
 void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 {
@@ -19,6 +43,8 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 
 	flag = 0;
 	initial_pos = (*stack_b)->value;
+	printf("situation_two\n");
+	print_stacks(stack_a, stack_b);
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value)
 	{
 		while ((*stack_a)->value > (*stack_a)->next->value
@@ -32,6 +58,7 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 		ft_pb(stack_a, stack_b);
 		flag++;
 	}
+	print_stacks(stack_a, stack_b);
 	while (initial_pos != (*stack_b)->value)
 	{
 		if ((*stack_a)->value > (*stack_a)->next->value)
@@ -42,4 +69,6 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 		bottom_b_value = (*stack_b)->value;
 		ft_rr(stack_a, stack_b);
 	}
+	printf("done the situation_two\n");
+	print_stacks(stack_a, stack_b);
 }

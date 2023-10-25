@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/25 02:40:47 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:22:17 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ static void	print_stacks(t_list **stack_a, t_list **stack_b)
 
 	tmp_a = *stack_a;
 	tmp_b = *stack_b;
+	printf("stack_a: ");
 	while (tmp_a)
 	{
 		printf("%d ", tmp_a->value);
 		tmp_a = tmp_a->next;
 	}
 	printf("\n");
+	printf("stack_b: ");
 	while (tmp_b)
 	{
 		printf("%d ", tmp_b->value);
 		tmp_b = tmp_b->next;
 	}
+	printf("\n");
 }
 
 static void	finish_the_sort(t_list **stack_a, t_list **stack_b)
@@ -83,10 +86,8 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 		tmp_b = *stack_b;
 		bottom_b_value = (mv_last(tmp_b))->value;
 	}
-	if ((*stack_a)->value < (*stack_a)->next->value)
+	if ((*stack_a)->value > (*stack_a)->next->value)
 		ft_sa(stack_a);
-	if ((*stack_a)->value == max)
-		ft_ra(stack_a);
 	else if (!*stack_b || (*stack_a)->value > (*stack_b)->value)
 		situation_one(stack_a, stack_b);
 	else if ((*stack_a)->value < bottom_b_value)
