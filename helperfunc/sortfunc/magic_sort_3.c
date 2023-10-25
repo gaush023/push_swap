@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 23:49:44 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/23 16:50:05 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:15:28 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,4 @@ void	magic_sort_3(t_list **stack_a)
 		else
 			ft_rra(stack_a);
 	}
-	printf("magic_sort_3\n");
 }

@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 01:03:03 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/22 21:26:12 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:51:17 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../list.h"
 # include "../push_swap.h"
 # include "libft/libft.h"
+# include <limits.h>
 
 int		ft_check_argc(int argc, char **argv);
 int		ft_print_actions(int n);

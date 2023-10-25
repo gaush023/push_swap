@@ -6,39 +6,22 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:41:07 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/23 18:56:46 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:04:52 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static long	add_numbers(long res, int digit, int sign, int *flag)
+long	ft_atoi(const char *str)
 {
-	if (sign == 1 && res > (LONG_MAX - digit) / 10)
-	{
-		*flag = 1;
-		return (LONG_MAX);
-	}
-	else if (sign == -1 && res * -1 < (LONG_MIN + digit) / 10)
-	{
-		*flag = 1;
-		return (LONG_MIN);
-	}
-	else
-		return (res * 10 + digit);
-}
-
-int	ft_atoi(const char *str)
-{
-	size_t	i;
+	long	i;
 	int		sign;
 	long	res;
-	int		flag;
+	 
 
 	i = 0;
 	sign = 1;
 	res = 0;
-	flag = 0;
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -49,9 +32,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res = add_numbers(res, str[i] - '0', sign, &flag);
-		if (flag == 1)
-			return (res);
+		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
 	return (res * sign);

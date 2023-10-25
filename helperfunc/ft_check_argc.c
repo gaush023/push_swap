@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 00:30:42 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/23 18:57:56 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:07:47 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,54 +24,36 @@ static int	ft_check_duplication(int num, char **argv, int i)
 	return (0);
 }
 
-static int	check_digits(char **args, int i)
+static int	check_maximamu(long tmp, char **args, int i)
 {
-	const char	*max_int_str1;
-	const char	*max_int_str2;
-	const char	*min_int_str;
+	int j;
 
-	max_int_str1 = "+2147483647";
-	max_int_str2 = "2147483647";
-	min_int_str = "-2147483648";
-	if (args[i][0] == '-')
+	j = 0;
+	while (args[i][j])
+			j++;
+	if(tmp < 0 || args[i][0] == '+')
 	{
-		if (ft_strlen(args[i]) > 11 && ft_strcmp(args[i], min_int_str) > 0)
-			return (1);
-		else if (ft_strlen(args[i]) == 11 && args[i][10] + '0' > 8)
-			return (1);
-	}
-	else if (args[i][0] == '+')
-	{
-		if (ft_strlen(args[i]) > 11 || (ft_strlen(args[i]) == 11
-				&& ft_strcmp(args[i], max_int_str1) > 0))
+		if (j > 11)
 			return (1);
 	}
 	else
 	{
-		if (ft_strlen(args[i]) > 10 || (ft_strlen(args[i]) == 10
-				&& ft_strcmp(args[i], max_int_str2) > 0))
+		if (j > 10)
 			return (1);
-	}
+	}		
+	if (tmp > INT_MAX || tmp < INT_MIN)
+		return (1);
 	return (0);
 }
 
 static int	ft_help_check_argc(long tmp, char **args, int i)
 {
 	if (!ft_isnum(args[i]))
-	{
-		printf("isnum\n");
 		return (-1);
-	}
 	if (ft_check_duplication(tmp, args, i))
-	{
-		printf("duplication\n");
 		return (-1);
-	}
-	if (check_digits(args, i))
-	{
-		printf("digits\n");
+	if (check_maximamu(tmp, args, i))
 		return (-1);
-	}
 	return (0);
 }
 
@@ -103,3 +85,7 @@ int	ft_check_argc(int argc, char **argv)
 	return (0);
 }
 
+//  int main(int argc, char **argv)
+//  {
+// 	 printf("%d\n", ft_check_argc(argc, argv));
+//  }
