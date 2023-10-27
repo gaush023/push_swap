@@ -36,7 +36,8 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b);
 void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value);
 void	situation_three(t_list **stack_a, t_list **stack_b, int bottom_b_value,
 			int bottom_a_value);
-void	situation_three_type_a(t_list **stack_a, t_list **stack_b);
+void	situation_three_type_a(t_list **stack_a, t_list **stack_b,
+			int bottom_b_value);
 void	situation_three_type_b(t_list **stack_a, t_list **stack_b,
 			int bottom_a_value, int bottom_b_value);
 

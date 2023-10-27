@@ -6,34 +6,31 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/25 16:08:15 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:14:43 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sortfunc.h"
 
-static void	print_stacks(t_list **stack_a, t_list **stack_b)
-{
-	t_list	*tmp_a;
-	t_list	*tmp_b;
+// static void	add_stacka_typea(t_list **stack_a, t_list **stack_b,
+			// int ini_pos)
+// {
+// 	int	bottom_b_value;
 
-	tmp_a = *stack_a;
-	tmp_b = *stack_b;
-	printf("stack_a: ");
-	while (tmp_a)
-	{
-		printf("%d ", tmp_a->value);
-		tmp_a = tmp_a->next;
-	}
-	printf("\n");
-	printf("stack_b: ");
-	while (tmp_b)
-	{
-		printf("%d ", tmp_b->value);
-		tmp_b = tmp_b->next;
-	}
-	printf("\n");
-}
+// 	while ((*stack_a)->value > (*stack_b)->value)
+// 		ft_rb(stack_b);
+// 	bottom_b_value = mv_last(*stack_b)->value;
+// 	while ((*stack_a)->value > (*stack_b)->value
+// 		&& bottom_b_value > (*stack_a)->value && ft_lstsize(stack_a) > 3)
+// 		ft_pb(stack_a, stack_b);
+// 	while ((*stack_b)->value != ini_pos)
+// 	{
+// 		if ((*stack_a)->value > (*stack_a)->next->value)
+// 			ft_sa(stack_a);
+// 		ft_rrr(stack_a, stack_b);
+// 	}
+// }
+
 
 static int	find_stop_pos(int ini_nbr, t_list **stack_b)
 {
@@ -45,36 +42,48 @@ static int	find_stop_pos(int ini_nbr, t_list **stack_b)
 	return ((tmp)->value);
 }
 
-void	situation_three_type_a(t_list **stack_a, t_list **stack_b)
+void	situation_three_type_a(t_list **stack_a, t_list **stack_b,
+		int bottom_b_value)
 {
 	int	stop_pos;
-	int	ini_stackb_node;
-	int	stackb_bottom;
+	int	stop_flag;
+	int	ini_pos_a;
 
+	stop_flag = 0;
 	stop_pos = find_stop_pos((*stack_a)->value, stack_b);
-	ini_stackb_node = (*stack_b)->value;
-	printf("situation_three_type_a\n");
-	print_stacks(stack_a, stack_b);
-	ft_pb(stack_a, stack_b);
-	while ((*stack_b)->next->value != stop_pos)
+	ini_pos_a = (*stack_a)->value;
+	while ((*stack_b)->value != stop_pos)
 	{
-		if ((*stack_a)->value >
-			(*stack_a)->next->value)
-			ft_ss(stack_a, stack_b);
-		else
-			ft_sb(stack_b);
-		ft_rr(stack_a, stack_b);
-	}
-	stackb_bottom = ini_stackb_node;
-	print_stacks(stack_a, stack_b);
-	while (ini_stackb_node != (*stack_b)->value)
-	{
-		stackb_bottom = mv_last(*stack_b)->value;
-		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value &&
-			(*stack_a)->value < stackb_bottom)
+		while (ft_lstsize(stack_a) > 3
+			&& (*stack_a)->next->value > (*stack_b)->value
+			&& bottom_b_value > (*stack_a)->next->value)
+		{
+			ft_sa(stack_a);
 			ft_pb(stack_a, stack_b);
-		ft_rrb(stack_b);
+			bottom_b_value = mv_last(*stack_b)->value;
+		}
+		ft_rb(stack_b);
+		stop_flag++;
 	}
-	printf("done the sort\n");
-	print_stacks(stack_a, stack_b);
+	bottom_b_value = mv_last(*stack_b)->value;
+	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
+		&& bottom_b_value > (*stack_a)->value)
+	{
+		if ((*stack_a)->value > (*stack_a)->next->value
+			&& (*stack_a)->next->value > (*stack_b)->value
+			&& bottom_b_value > (*stack_a)->next->value)
+			ft_sa(stack_a);
+		ft_pb(stack_a, stack_b);
+	}
+	while (stop_flag > 0)
+	{
+		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value &&
+			bottom_b_value > (*stack_a)->value)
+			ft_pb(stack_a, stack_b);
+		if ((*stack_a)->value < (*stack_a)->next->value)
+			ft_sa(stack_a);
+		ft_rrb(stack_b);
+		bottom_b_value = mv_last(*stack_b)->value;
+		stop_flag--;
+	}
 }
