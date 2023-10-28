@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/27 15:06:02 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:22:46 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 // 	printf("\n");
 // }
 
-
 void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 {
 	int	flag;
@@ -55,11 +54,11 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	}
 	while (initial_pos != (*stack_b)->value)
 	{
-		if ((*stack_a)->value > (*stack_a)->next->value)
-			ft_sa(stack_a);
 		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
 			&& (*stack_a)->value < bottom_b_value)
 			ft_pb(stack_a, stack_b);
+		if ((*stack_a)->value > (*stack_a)->next->value)
+			ft_sa(stack_a);
 		bottom_b_value = (*stack_b)->value;
 		ft_rr(stack_a, stack_b);
 	}
