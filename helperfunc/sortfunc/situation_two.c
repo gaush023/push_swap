@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/28 18:22:46 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:38:57 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,40 @@
 // 	printf("\n");
 // }
 
+static void	add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_topos)
+{
+	int	bottom_b_value;
+
+	while ((*stack_a)->value < (*stack_b)->value)
+		ft_rrb(stack_b);
+	bottom_b_value = mv_last(*stack_b)->value;
+	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
+		&& bottom_b_value > (*stack_a)->value)
+	{
+		if ((*stack_a)->value > (*stack_a)->next->value
+			&& (*stack_a)->next->value > (*stack_b)->value)
+			ft_sa(stack_a);
+		ft_pb(stack_a, stack_b);
+	}
+	while ((*stack_b)->value != back_topos)
+	{
+		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
+			&& bottom_b_value > (*stack_a)->value)
+			ft_pb(stack_a, stack_b);
+		ft_rr(stack_a, stack_b);
+		bottom_b_value = mv_last(*stack_b)->value;
+	}
+}
+
 void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 {
 	int	flag;
 	int	initial_pos;
+	int	ini_pos_a;
 
 	flag = 0;
 	initial_pos = (*stack_b)->value;
+	ini_pos_a = (*stack_a)->value;
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value)
 	{
 		while ((*stack_a)->value > (*stack_a)->next->value
@@ -57,6 +84,9 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
 			&& (*stack_a)->value < bottom_b_value)
 			ft_pb(stack_a, stack_b);
+		if ((*stack_a)->value < (*stack_b)->value
+			&& (*stack_a)->value > ini_pos_a)
+			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value);
 		if ((*stack_a)->value > (*stack_a)->next->value)
 			ft_sa(stack_a);
 		bottom_b_value = (*stack_b)->value;
