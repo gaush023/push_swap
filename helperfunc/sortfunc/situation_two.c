@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/28 21:38:57 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/28 22:00:10 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,24 @@
 // 	}
 // 	printf("\n");
 // }
+static int	find_median(t_list **stack_b)
+{
+	t_list	*tmp;
+	int		target;
+	int		n;
 
-static void	add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_topos)
+	tmp = *stack_b;
+	n = 0;
+	target = ft_lstsize(stack_b) / 2;
+	while (n < target)
+	{
+		tmp = tmp->next;
+		n++;
+	}
+	return (tmp->value);
+}
+
+static void	add_stacka_typea(t_list **stack_a, t_list **stack_b, int back_topos)
 {
 	int	bottom_b_value;
 
@@ -62,10 +78,12 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	int	flag;
 	int	initial_pos;
 	int	ini_pos_a;
+	int	median;
 
 	flag = 0;
 	initial_pos = (*stack_b)->value;
 	ini_pos_a = (*stack_a)->value;
+	median = find_median(*stack_a);
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value)
 	{
 		while ((*stack_a)->value > (*stack_a)->next->value
@@ -86,9 +104,11 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 			ft_pb(stack_a, stack_b);
 		if ((*stack_a)->value < (*stack_b)->value
 			&& (*stack_a)->value > ini_pos_a)
-			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value);
+			add_stacka_typea(stack_a, stack_b, (*stack_b)->value);
 		if ((*stack_a)->value > (*stack_a)->next->value)
 			ft_sa(stack_a);
+		if(median > (*stack_a)->value)
+			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value);
 		bottom_b_value = (*stack_b)->value;
 		ft_rr(stack_a, stack_b);
 	}
