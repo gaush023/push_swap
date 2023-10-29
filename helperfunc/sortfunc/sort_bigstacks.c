@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/29 19:43:59 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/29 19:46:21 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	situation_one(t_list **stack_a, t_list **stack_b)
 {
 	if (!*stack_b)
 		ft_pb(stack_a, stack_b);
-	else if (ft_lstsize(*stack_a) > 3)
+	else if (ft_lstsize(stack_a) > 3)
 		ft_pb(stack_a, stack_b);
 }
 
