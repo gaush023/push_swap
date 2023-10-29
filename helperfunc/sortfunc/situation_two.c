@@ -6,26 +6,26 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/29 19:40:48 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:35:06 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sortfunc.h"
 #include <stdio.h>
 
-static int	is_reverse_sorted(t_list **stack)
-{
-	t_list	*head;
+// static int	is_reverse_sorted(t_list **stack)
+// {
+// 	t_list	*head;
 
-	head = *stack;
-	while (head && head->next)
-	{
-		if (head->value < head->next->value)
-			return (0);
-		head = head->next;
-	}
-	return (1);
-}
+// 	head = *stack;
+// 	while (head && head->next)
+// 	{
+// 		if (head->value < head->next->value)
+// 			return (0);
+// 		head = head->next;
+// 	}
+// 	return (1);
+// }
 
 // static void	print_stacks(t_list **stack_a, t_list **stack_b)
 // {
@@ -102,11 +102,10 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	}
 	while (initial_pos != (*stack_b)->value)
 	{
-		ft_rr(stack_a, stack_b);
-		if (is_reverse_sorted(stack_b))
-			break ;
-		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value)
+		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value
+			&& ft_lstsize(stack_b) > 3)
 			add_stacka_typea(stack_a, stack_b, (*stack_b)->value);
+		ft_rr(stack_a, stack_b);
 		bottom_b_value = (*stack_b)->value;
 	}
 }
