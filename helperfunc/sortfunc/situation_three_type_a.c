@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/28 21:39:28 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/29 19:38:30 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,11 @@ static void	add_stacka_tyea(t_list **stack_a, t_list **stack_b, int back_pos)
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
 		&& bottom_b_value > (*stack_a)->value)
 	{
-		if ((*stack_a)->value > (*stack_a)->next->value
-			&& (*stack_a)->next->value > (*stack_b)->value
-			&& bottom_b_value > (*stack_a)->next->value)
-			ft_sa(stack_a);
 		ft_pb(stack_a, stack_b);
 	}
 	while ((*stack_b)->value != back_pos)
 	{
-		if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
-			&& bottom_b_value > (*stack_a)->value)
-			ft_pb(stack_a, stack_b);
 		ft_rrr(stack_a, stack_b);
-		bottom_b_value = mv_last(*stack_b)->value;
 	}
 }
 
@@ -59,14 +51,6 @@ void	situation_three_type_a(t_list **stack_a, t_list **stack_b,
 	stop_pos = find_stop_pos((*stack_a)->value, stack_b);
 	while ((*stack_b)->value != stop_pos)
 	{
-		while (ft_lstsize(stack_a) > 3
-			&& (*stack_a)->next->value > (*stack_b)->value
-			&& bottom_b_value > (*stack_a)->next->value)
-		{
-			ft_sa(stack_a);
-			ft_pb(stack_a, stack_b);
-			bottom_b_value = mv_last(*stack_b)->value;
-		}
 		ft_rb(stack_b);
 		stop_flag++;
 	}
@@ -75,10 +59,6 @@ void	situation_three_type_a(t_list **stack_a, t_list **stack_b,
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
 		&& bottom_b_value > (*stack_a)->value)
 	{
-		if ((*stack_a)->value > (*stack_a)->next->value
-			&& (*stack_a)->next->value > (*stack_b)->value
-			&& bottom_b_value > (*stack_a)->next->value)
-			ft_sa(stack_a);
 		ft_pb(stack_a, stack_b);
 	}
 	if (stop_flag > ft_lstsize(stack_b) / 2)
@@ -92,14 +72,9 @@ void	situation_three_type_a(t_list **stack_a, t_list **stack_b,
 	{
 		while (stop_flag > 0)
 		{
-			if (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value
-				&& bottom_b_value > (*stack_a)->value)
-				ft_pb(stack_a, stack_b);
 			if ((*stack_a)->value < (*stack_b)->value
 				&& (*stack_a)->value > ini_pos_a)
 				add_stacka_tyea(stack_a, stack_b, (*stack_b)->value);
-			if ((*stack_a)->value < (*stack_a)->next->value)
-				ft_sa(stack_a);
 			ft_rrr(stack_a, stack_b);
 			bottom_b_value = mv_last(*stack_b)->value;
 			stop_flag--;
