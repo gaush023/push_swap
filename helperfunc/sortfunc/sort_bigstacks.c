@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/29 20:34:24 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:36:15 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,20 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 		bottom_b_value = (mv_last(tmp_b))->value;
 	}
 	if (!*stack_b || (*stack_a)->value > (*stack_b)->value)
+	{
+		// printf("\n=============\nsituation_one\n=============\n");
 		situation_one(stack_a, stack_b);
+	}
 	else if ((*stack_a)->value < bottom_b_value)
+	{
+		// printf("\n=============\nsituation_two\n=============\n");
 		situation_two(stack_a, stack_b, bottom_b_value);
+	}
 	else
-		situation_three(stack_a, stack_b, bottom_a_value, bottom_b_value);
+	{
+		// printf("\n=============\nsituation_three\n=============\n");
+			situation_three(stack_a, stack_b, bottom_a_value, bottom_b_value);
+	}
 }
 
 void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
@@ -106,8 +115,11 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(stack_a) > 3)
 	{
 		do_the_sort(stack_a, stack_b);
+		// if (!is_reversed_sorted(stack_b))
+		// 	return (print_stacks(stack_a, stack_b));
 	}
 	if (!is_sorted(stack_a))
 		magic_sort_3(stack_a);
 	finish_the_sort(stack_a, stack_b);
+	// print_stacks(stack_a, stack_b);
 }
