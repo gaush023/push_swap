@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/30 17:36:57 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:12:58 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_pos,
 		int median)
 {
 	int	bottom_b_value;
+
 	// int	n;
 	// int	n2;
-
 	// print_stacks(stack_a, stack_b);
 	// printf("%d\n", back_top_pos);
 	// printf("stack_a: %d\n", (*stack_a)->value);
@@ -67,12 +67,12 @@ static void	add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_pos,
 		ft_pb(stack_a, stack_b);
 		bottom_b_value = mv_last(*stack_b)->value;
 	}
-	while ((*stack_b)->value != back_pos)
+	while (ft_lstsize(stack_a) > 3 && (*stack_b)->value != back_pos)
 	{
-		ft_rr(stack_a, stack_b);
 		if (bottom_b_value > (*stack_a)->value
 			&& (*stack_a)->value > (*stack_b)->value && ft_lstsize(stack_a) > 3)
 			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value, median);
+		ft_rr(stack_a, stack_b);
 	}
 }
 
@@ -125,13 +125,12 @@ void	situation_three_type_b(t_list **stack_a, t_list **stack_b,
 	{
 		ft_pb(stack_a, stack_b);
 	}
-	while ((*stack_b)->value != ini_pos_b)
+	while (ft_lstsize(stack_a) > 3 && (*stack_b)->value != ini_pos_b)
 	{
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value
 			&& ft_lstsize(stack_b) > 3)
 			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value, median);
 		ft_rr(stack_a, stack_b);
-		bottom_b_value = mv_last(*stack_b)->value;
 	}
 	bottom_a_value = 1;
 }

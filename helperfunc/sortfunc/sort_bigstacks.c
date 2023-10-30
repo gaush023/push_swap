@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/30 17:36:15 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:41:22 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,80 @@
 // 	return (1);
 // }
 
-// static void	print_stacks(t_list **stack_a, t_list **stack_b)
-// {
-// 	t_list	*tmp_a;
-// 	t_list	*tmp_b;
+static void	print_stacks(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*tmp_a;
+	t_list	*tmp_b;
 
-// 	tmp_a = *stack_a;
-// 	tmp_b = *stack_b;
-// 	printf("stack_a: ");
-// 	while (tmp_a)
-// 	{
-// 		printf("%d ", tmp_a->value);
-// 		tmp_a = tmp_a->next;
-// 	}
-// 	printf("\n");
-// 	printf("stack_b: ");
-// 	while (tmp_b)
-// 	{
-// 		printf("%d ", tmp_b->value);
-// 		tmp_b = tmp_b->next;
-// 	}
-// 	printf("\n");
-// }
+	tmp_a = *stack_a;
+	tmp_b = *stack_b;
+	printf("stack_a: ");
+	while (tmp_a)
+	{
+		printf("%d ", tmp_a->value);
+		tmp_a = tmp_a->next;
+	}
+	printf("\n");
+	printf("stack_b: ");
+	while (tmp_b)
+	{
+		printf("%d ", tmp_b->value);
+		tmp_b = tmp_b->next;
+	}
+	printf("\n");
+}
 
 static void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 {
-	int	min;
-	int	midle;
-	int	max;
+	int	bottom_a_value;
+	int	flag;
 
-	min = (*stack_a)->value;
-	midle = (*stack_a)->next->value;
-	max = (*stack_a)->next->next->value;
-	while (*stack_b && (*stack_b)->value > max)
+	bottom_a_value = mv_last(*stack_a)->value;
+	while (bottom_a_value > (*stack_b)->value
+		&& (*stack_b)->value > (*stack_a)->value)
+	{
+		ft_ra(stack_a);
+		bottom_a_value = mv_last(*stack_a)->value;
+		print_stacks(stack_a, stack_b);
+	}
+	printf("bottom_a_value: %d\n", bottom_a_value);
+	while ((*stack_b)->value < (*stack_a)->value && *stack_b)
+	{
 		ft_pa(stack_a, stack_b);
-	ft_rra(stack_a);
-	while (*stack_b && (*stack_b)->value > midle)
-		ft_pa(stack_a, stack_b);
-	ft_rra(stack_a);
-	while (*stack_b && (*stack_b)->value > min)
-		ft_pa(stack_a, stack_b);
-	ft_rra(stack_a);
+	}
+	print_stacks(stack_a, stack_b);
+	while (bottom_a_value != find_max_node(*stack_a))
+	{
+		ft_rra(stack_a);
+		bottom_a_value = mv_last(*stack_a)->value;
+	}
+	if (!*stack_b)
+		return ;
+	if (ft_lstsize(stack_a) < ft_lstsize(stack_b))
+		flag = 1;
+	else
+		flag = 0;
+	print_stacks(stack_a, stack_b);
 	while (*stack_b)
 		ft_pa(stack_a, stack_b);
+	if (is_sorted(stack_a))
+		return ;
+	if (flag == 1)
+	{
+		while (bottom_a_value != find_max_node(*stack_a))
+		{
+			ft_rra(stack_a);
+			bottom_a_value = mv_last(*stack_a)->value;
+		}
+	}
+	else
+	{
+		while (bottom_a_value != find_max_node(*stack_a))
+		{
+			ft_ra(stack_a);
+			bottom_a_value = mv_last(*stack_a)->value;
+		}
+	}
 }
 
 static void	situation_one(t_list **stack_a, t_list **stack_b)
@@ -106,7 +137,7 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 	else
 	{
 		// printf("\n=============\nsituation_three\n=============\n");
-			situation_three(stack_a, stack_b, bottom_a_value, bottom_b_value);
+		situation_three(stack_a, stack_b, bottom_a_value, bottom_b_value);
 	}
 }
 
@@ -115,11 +146,12 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(stack_a) > 3)
 	{
 		do_the_sort(stack_a, stack_b);
-		// if (!is_reversed_sorted(stack_b))
+		// if (!is_reverse_sorted(stack_b))
 		// 	return (print_stacks(stack_a, stack_b));
 	}
 	if (!is_sorted(stack_a))
 		magic_sort_3(stack_a);
+	print_stacks(stack_a, stack_b);
 	finish_the_sort(stack_a, stack_b);
-	// print_stacks(stack_a, stack_b);
+	print_stacks(stack_a, stack_b);
 }
