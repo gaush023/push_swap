@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:40:09 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/30 20:05:10 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:21:26 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,20 @@ int	find_insertion_pos(int i_p, t_list **stack_b)
 void	situation_three(t_list **stack_a, t_list **stack_b, int bottom_a_value,
 		int bottom_b_value)
 {
-	while (ft_lstsize(stack_a) > 3
-		&& (*stack_a)->value < (*stack_a)->next->value
-		&& (*stack_a)->next->value > (*stack_b)->value)
-	{
-		ft_sa(stack_a);
-		ft_pb(stack_a, stack_b);
-		while (ft_lstsize(stack_a) > 3 && bottom_a_value > (*stack_b)->value)
-		{
-			ft_rra(stack_a);
-			ft_pb(stack_a, stack_b);
-			bottom_a_value = mv_last(*stack_a)->value;
-		}
-		return ;
-	}
-	while (ft_lstsize(stack_a) > 3 && bottom_a_value < bottom_b_value)
+	while (ft_lstsize(stack_a) > 3 && bottom_a_value > (*stack_b)->value)
 	{
 		ft_rra(stack_a);
-		situation_two(stack_a, stack_b, bottom_b_value);
+		ft_pb(stack_a, stack_b);
 		bottom_a_value = mv_last(*stack_a)->value;
-		bottom_b_value = mv_last(*stack_b)->value;
-		return ;
 	}
+	// while (ft_lstsize(stack_a) > 3 && bottom_a_value < bottom_b_value)
+	// {
+	// 	ft_rra(stack_a);
+	// 	situation_two(stack_a, stack_b, bottom_b_value);
+	// 	bottom_a_value = mv_last(*stack_a)->value;
+	// 	bottom_b_value = mv_last(*stack_b)->value;
+	// 	return ;
+	// }
 	// bottom_b_value = mv_last(*stack_b)->value;
 	// if ((*stack_a)->value < (*stack_b)->value
 	// 	&& (*stack_a)->value > bottom_b_value)
@@ -61,10 +53,12 @@ void	situation_three(t_list **stack_a, t_list **stack_b, int bottom_a_value,
 	if (find_insertion_pos((*stack_a)->value, stack_b) < ft_lstsize(stack_b)
 		/ 2)
 	{
+		// printf("\n++++++++\ntype a\n");
 		situation_three_type_a(stack_a, stack_b, bottom_b_value);
 	}
 	else
 	{
+		// printf("\n++++++++\ntype b\n");
 		situation_three_type_b(stack_a, stack_b, bottom_a_value,
 				bottom_b_value);
 	}

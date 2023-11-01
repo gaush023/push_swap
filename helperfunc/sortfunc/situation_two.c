@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/30 20:12:17 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:07:32 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ static void	add_stacka_typea(t_list **stack_a, t_list **stack_b, int back_pos,
 		// printf("%d\n", n2);
 		// printf("%d\n", median);
 		// printf("\n===========\n");
-		bottom_b_value = mv_last(*stack_b)->value;
 	}
+	bottom_b_value = mv_last(*stack_b)->value;
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
 		&& (*stack_a)->value > (*stack_b)->value)
 	{
 		ft_pb(stack_a, stack_b);
 		bottom_b_value = mv_last(*stack_b)->value;
 	}
-	while (ft_lstsize(stack_a) > 3 &&(*stack_b)->value != back_pos)
+	while (ft_lstsize(stack_a) > 3 && (*stack_b)->value != back_pos)
 	{
 		if (bottom_b_value > (*stack_a)->value
 			&& (*stack_a)->value > (*stack_b)->value && ft_lstsize(stack_a) > 3)
@@ -131,7 +131,7 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value
 			&& ft_lstsize(stack_b) > 3)
 			add_stacka_typea(stack_a, stack_b, (*stack_b)->value, median);
-		ft_rr(stack_a, stack_b);
+		ft_rb(stack_b);
 		bottom_b_value = (*stack_b)->value;
 	}
 }
