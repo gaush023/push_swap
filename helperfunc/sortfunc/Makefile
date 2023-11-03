@@ -6,13 +6,14 @@
 #    By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 00:17:25 by sagemura          #+#    #+#              #
-#    Updated: 2023/10/23 14:14:59 by sagemura         ###   ########.fr        #
+#    Updated: 2023/11/03 20:16:00 by sagemura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = sortfunc.a
 SRCS =  execute_sort.c helper_sort.c  magic_sort_3.c operation.c operation_2.c operation_3.c \
-situation_three.c situation_three_type_a.c situation_three_type_b.c situation_two.c sort_bigstacks.c
+situation_three.c situation_three_type_a.c situation_three_type_b.c situation_two.c sort_bigstacks.c \
+add_stacka.c
 
 OBJS = $(SRCS:.c=.o)
 ALL_OBJS = $(OBJS)

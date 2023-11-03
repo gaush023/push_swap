@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 23:50:14 by sagemura          #+#    #+#             */
-/*   Updated: 2023/10/25 01:00:33 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:06:04 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,21 @@ int	find_min_node(t_list *stacks)
 		stacks = stacks->next;
 	}
 	return (min);
+}
+
+int	find_median(t_list **stack_b)
+{
+	t_list	*tmp;
+	int		target;
+	int		n;
+
+	tmp = *stack_b;
+	n = 0;
+	target = ft_lstsize(stack_b) / 2;
+	while (n < target)
+	{
+		tmp = tmp->next;
+		n++;
+	}
+	return (tmp->value);
 }

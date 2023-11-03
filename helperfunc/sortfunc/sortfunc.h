@@ -19,6 +19,7 @@
 
 int		find_max_node(t_list *stacks);
 int		find_min_node(t_list *stacks);
+int		find_median(t_list **stack_b);
 void	ft_sa(t_list **stack_a);
 void	ft_sb(t_list **stack_b);
 void	ft_ss(t_list **stack_a, t_list **stack_b);
@@ -40,5 +41,9 @@ void	situation_three_type_a(t_list **stack_a, t_list **stack_b,
 			int bottom_b_value);
 void	situation_three_type_b(t_list **stack_a, t_list **stack_b,
 			int bottom_a_value, int bottom_b_value);
+int		add_stacka_typea(t_list **stack_a, t_list **stack_b, int median);
+int		add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_pos,
+			int median);
+int	quit_thesort_typea(t_list **stack_a, t_list **stack_b, int median);
 
 #endif
