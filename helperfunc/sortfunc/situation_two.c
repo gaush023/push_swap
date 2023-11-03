@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/01 20:07:32 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:23:23 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	add_stacka_typea(t_list **stack_a, t_list **stack_b, int back_pos,
 		// printf("%d\n", n2);
 		// printf("%d\n", median);
 		// printf("\n===========\n");
+		bottom_b_value = mv_last(*stack_b)->value;
 	}
 	bottom_b_value = mv_last(*stack_b)->value;
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
@@ -126,7 +127,7 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	{
 		ft_pb(stack_a, stack_b);
 	}
-	while (ft_lstsize(stack_a) > 3 && initial_pos != (*stack_b)->value)
+	while (initial_pos != (*stack_b)->value)
 	{
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value
 			&& ft_lstsize(stack_b) > 3)
