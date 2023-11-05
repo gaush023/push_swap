@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/03 20:25:19 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/05 01:44:17 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@
 // 	printf("\n");
 // }
 
-
 void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 {
 	int	initial_pos;
 	int	ini_pos_a;
+	int	bottom_a_value;
 	int	median;
 
 	initial_pos = (*stack_b)->value;
@@ -63,15 +63,26 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	ft_pb(stack_a, stack_b);
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
 		&& (*stack_a)->value > (*stack_b)->value)
-	{
 		ft_pb(stack_a, stack_b);
+	bottom_a_value = mv_last(*stack_a)->value;
+	while (ft_lstsize(stack_a) > 3 && bottom_a_value < bottom_b_value
+		&& bottom_a_value > (*stack_b)->value)
+	{
+		ft_rra(stack_a);
+		ft_pb(stack_a, stack_b);
+		bottom_a_value = mv_last(*stack_a)->value;
 	}
 	while (initial_pos != (*stack_b)->value)
 	{
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value
 			&& ft_lstsize(stack_b) > 3)
-			add_stacka_typea(stack_a, stack_b, (*stack_b)->value, median);
-		ft_rb(stack_b);
+			add_stacka_typea(stack_a, stack_b, (*stack_b)->value);
+		ft_rr(stack_a, stack_b);
 		bottom_b_value = (*stack_b)->value;
+		while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
+			&& (*stack_a)->value > (*stack_b)->value)
+		{
+			ft_pb(stack_a, stack_b);
+		}
 	}
 }
