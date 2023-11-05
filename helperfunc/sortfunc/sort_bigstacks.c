@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/05 01:16:43 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/05 15:20:57 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,23 @@ static void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 
 static void	situation_one(t_list **stack_a, t_list **stack_b)
 {
+	int	bottom_b_value;
+
 	if (!*stack_b)
 		ft_pb(stack_a, stack_b);
 	else if (ft_lstsize(stack_a) > 3)
 		ft_pb(stack_a, stack_b);
+	bottom_b_value = (mv_last(*stack_b))->value;
+	while (ft_lstsize(stack_a) > 3
+		&& (*stack_a)->next->value > (*stack_b)->value
+		&& bottom_b_value > (*stack_a)->next->value)
+	{
+		if ((*stack_a)->value > (*stack_a)->next->value
+			&& (*stack_a)->value > bottom_b_value)
+			ft_ra(stack_a);
+		ft_pb(stack_a, stack_b);
+		bottom_b_value = (mv_last(*stack_b))->value;
+	}
 }
 
 static void	do_the_sort(t_list **stack_a, t_list **stack_b)
@@ -106,7 +119,7 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 
 void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 {
-	while (ft_lstsize(stack_a) > 3 )
+	while (ft_lstsize(stack_a) > 3)
 	{
 		do_the_sort(stack_a, stack_b);
 	}
