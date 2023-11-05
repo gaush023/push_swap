@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/05 02:30:20 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:05:03 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,14 @@ int	quit_thesort_typea(t_list **stack_a, t_list **stack_b, int median)
 	median = find_median_type_s(stack_b);
 	while ((*stack_b)->value != max_b)
 	{
-		bottom_b_value = (mv_last(*stack_b))->value;
-		while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
-			&& (*stack_a)->value > (*stack_b)->value)
-			ft_pb(stack_a, stack_b);
 		if (bottom_b_value > (*stack_a)->value
 			&& (*stack_a)->value > (*stack_b)->value)
 			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value, median);
 		ft_rr(stack_a, stack_b);
 		bottom_b_value = (mv_last(*stack_b))->value;
+		while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
+			&& (*stack_a)->value > (*stack_b)->value)
+			ft_pb(stack_a, stack_b);
 	}
 	return (1);
 }
@@ -75,13 +74,13 @@ int	quit_thesort_typeb(t_list **stack_a, t_list **stack_b, int median)
 	median = find_median_type_s(stack_b);
 	while ((*stack_b)->value != max_b)
 	{
+		if ((*stack_a)->value > median && (*stack_a)->value < (*stack_b)->value)
+			add_stacka_typea(stack_a, stack_b, median);
+		ft_rrr(stack_a, stack_b);
 		bottom_b_value = (mv_last(*stack_b))->value;
 		while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
 			&& (*stack_a)->value > (*stack_b)->value)
 			ft_pb(stack_a, stack_b);
-		if ((*stack_a)->value > median && (*stack_a)->value < (*stack_b)->value)
-			add_stacka_typea(stack_a, stack_b, median);
-		ft_rrr(stack_a, stack_b);
 	}
 	return (1);
 }
