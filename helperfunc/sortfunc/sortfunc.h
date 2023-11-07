@@ -45,6 +45,7 @@ int		add_stacka_typea(t_list **stack_a, t_list **stack_b, int median);
 int		add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_pos,
 			int median);
 int		quit_thesort_typea(t_list **stack_a, t_list **stack_b, int median);
-int	quit_thesort_typeb(t_list **stack_a, t_list **stack_b, int median);
+int		quit_thesort_typeb(t_list **stack_a, t_list **stack_b, int median);
+void	finish_the_sort(t_list **stack_a, t_list **stack_b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/05 21:14:29 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/07 19:50:27 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ int	add_stacka_typea(t_list **stack_a, t_list **stack_b, int median)
 	bottom_b_value = (mv_last(*stack_b))->value;
 	back_pos = (*stack_b)->value;
 	while ((*stack_a)->value < (*stack_b)->value)
-	{
 		ft_rb(stack_b);
-	}
 	bottom_b_value = mv_last(*stack_b)->value;
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
 		&& (*stack_a)->value > (*stack_b)->value)
+	{
+		if ((*stack_a)->value > (*stack_a)->next->value
+			&& (*stack_a)->next->value > (*stack_b)->value)
+			ft_sa(stack_a);
 		ft_pb(stack_a, stack_b);
+	}
 	bottom_a_value = (mv_last(*stack_a))->value;
 	while (ft_lstsize(stack_a) > 3 && bottom_a_value < bottom_b_value
 		&& bottom_a_value > (*stack_b)->value)
@@ -48,12 +51,12 @@ int	add_stacka_typea(t_list **stack_a, t_list **stack_b, int median)
 	while ((*stack_b)->value != back_pos)
 	{
 		if (front_size(stack_b) <= back_size(stack_b) * 0.7
-			&& ft_lstsize(stack_a) * 1.25 < ft_lstsize(stack_b))
+			&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
 			return (quit_thesort_typea(stack_a, stack_b, median));
 		if ((*stack_a)->value > median && (*stack_a)->value < (*stack_b)->value)
 			add_stacka_typea(stack_a, stack_b, median);
 		ft_rrr(stack_a, stack_b);
-		bottom_b_value = (*stack_b)->value;
+		bottom_b_value = (mv_last(*stack_b))->value;
 		while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
 			&& (*stack_a)->value > (*stack_b)->value)
 			ft_pb(stack_a, stack_b);
@@ -96,12 +99,12 @@ int	add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_pos,
 	while ((*stack_b)->value != back_pos)
 	{
 		if (front_size(stack_b) >= back_size(stack_b) * 0.7
-			&& ft_lstsize(stack_a) * 1.25 < ft_lstsize(stack_b))
+			&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
 			return (quit_thesort_typeb(stack_a, stack_b, median));
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value)
 			add_stacka_typeb(stack_a, stack_b, (*stack_b)->value, median);
 		ft_rr(stack_a, stack_b);
-		bottom_b_value = (*stack_b)->value;
+		bottom_b_value = (mv_last(*stack_b))->value;
 		while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
 			&& (*stack_a)->value > (*stack_b)->value)
 			ft_pb(stack_a, stack_b);

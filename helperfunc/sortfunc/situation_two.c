@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/05 21:23:55 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/07 20:31:11 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 
 	initial_pos = (*stack_b)->value;
 	ini_pos_a = (*stack_a)->value;
-	median = find_median(stack_b);
+	median = (*stack_a)->value;
 	flag = 0;
 	ft_pb(stack_a, stack_b);
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value < bottom_b_value
@@ -81,6 +81,8 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 		ft_ra(stack_a);
 		ft_pb(stack_a, stack_b);
 	}
+	// print_stacks(stack_a, stack_b);
+	// printf("median: %d\n", median);
 	while (initial_pos != (*stack_b)->value)
 	{
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value)
@@ -94,4 +96,6 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 			&& (*stack_a)->value > (*stack_b)->value)
 			ft_pb(stack_a, stack_b);
 	}
+	// print_stacks(stack_a, stack_b);
+	// printf("situation_two\n");
 }

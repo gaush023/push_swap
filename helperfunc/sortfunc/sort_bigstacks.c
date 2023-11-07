@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/05 20:43:24 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/07 20:30:05 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,47 +49,24 @@
 // 	printf("\n");
 // }
 
-static void	finish_the_sort(t_list **stack_a, t_list **stack_b)
-{
-	int	min;
-	int	midle;
-	int	max;
-
-	min = (*stack_a)->value;
-	midle = (*stack_a)->next->value;
-	max = (*stack_a)->next->next->value;
-	while (*stack_b && (*stack_b)->value > max)
-		ft_pa(stack_a, stack_b);
-	ft_rra(stack_a);
-	while (*stack_b && (*stack_b)->value > midle)
-		ft_pa(stack_a, stack_b);
-	ft_rra(stack_a);
-	while (*stack_b && (*stack_b)->value > min)
-		ft_pa(stack_a, stack_b);
-	ft_rra(stack_a);
-	while (*stack_b)
-		ft_pa(stack_a, stack_b);
-}
-
 static void	situation_one(t_list **stack_a, t_list **stack_b)
 {
-	int	bottom_b_value;
-
 	if (!*stack_b)
 		ft_pb(stack_a, stack_b);
-	else if (ft_lstsize(stack_a) > 3)
+	while (ft_lstsize(stack_a) > 3
+		&& (*stack_a)->next->value > (*stack_b)->value)
+	{
+		if ((*stack_a)->value < (*stack_b)->value)
+			ft_ra(stack_a);
+		else
+			ft_pb(stack_a, stack_b);
+		return ;
+	}
+	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value)
+	{
 		ft_pb(stack_a, stack_b);
-	bottom_b_value = (mv_last(*stack_b))->value;
-	// while (ft_lstsize(stack_a) > 3
-	// 	&& (*stack_a)->next->value > (*stack_b)->value
-	// 	&& bottom_b_value > (*stack_a)->next->value)
-	// {
-	// 	if ((*stack_a)->value > (*stack_a)->next->value
-	// 		&& (*stack_a)->value > bottom_b_value)
-	// 		ft_ra(stack_a);
-	// 	ft_pb(stack_a, stack_b);
-	// 	bottom_b_value = (mv_last(*stack_b))->value;
-	// }
+		return ;
+	}
 }
 
 static void	do_the_sort(t_list **stack_a, t_list **stack_b)
@@ -106,9 +83,9 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 		tmp_b = *stack_b;
 		bottom_b_value = (mv_last(tmp_b))->value;
 	}
-	// if ((*stack_a)->value < (*stack_a)->next->value
-	// 	&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
-	// 	ft_sa(stack_a);
+	if ((*stack_a)->value < (*stack_a)->next->value
+		&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
+		ft_sa(stack_a);
 	if (!*stack_b || (*stack_a)->value > (*stack_b)->value)
 		situation_one(stack_a, stack_b);
 	else if ((*stack_a)->value < bottom_b_value)
@@ -122,10 +99,12 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(stack_a) > 3)
 	{
 		do_the_sort(stack_a, stack_b);
+		// if (!is_reverse_sorted(stack_b))
+		// 	return (print_stacks(stack_a, stack_b));
 	}
 	if (!is_sorted(stack_a))
 		magic_sort_3(stack_a);
-	// print_stacks(stack_a, stack_b);
 	finish_the_sort(stack_a, stack_b);
+	// printf("\n======\nfinish\n======\n");
 	// print_stacks(stack_a, stack_b);
 }
