@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/07 20:30:05 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:47:42 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 
 void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 {
-	while (ft_lstsize(stack_a) > 3)
+	while (ft_lstsize(stack_a) > 3 && !is_sorted(stack_a))
 	{
 		do_the_sort(stack_a, stack_b);
 		// if (!is_reverse_sorted(stack_b))
@@ -105,6 +105,7 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 	if (!is_sorted(stack_a))
 		magic_sort_3(stack_a);
 	finish_the_sort(stack_a, stack_b);
+	// printf("\n======\nfinish the sort\n======\n");
 	// printf("\n======\nfinish\n======\n");
 	// print_stacks(stack_a, stack_b);
 }

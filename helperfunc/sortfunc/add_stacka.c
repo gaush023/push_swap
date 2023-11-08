@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/07 19:50:27 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:24:04 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	add_stacka_typea(t_list **stack_a, t_list **stack_b, int median)
 		ft_pb(stack_a, stack_b);
 		bottom_b_value = (mv_last(*stack_b))->value;
 	}
-	while ((*stack_b)->value != back_pos)
+	while (ft_lstsize(stack_a) > 3 && !is_sorted(stack_a)
+		&& (*stack_b)->value != back_pos)
 	{
 		if (front_size(stack_b) <= back_size(stack_b) * 0.7
 			&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
@@ -96,7 +97,8 @@ int	add_stacka_typeb(t_list **stack_a, t_list **stack_b, int back_pos,
 		ft_pb(stack_a, stack_b);
 		bottom_b_value = (mv_last(*stack_b))->value;
 	}
-	while ((*stack_b)->value != back_pos)
+	while (ft_lstsize(stack_a) > 3 && !is_sorted(stack_a)
+		&& (*stack_b)->value != back_pos)
 	{
 		if (front_size(stack_b) >= back_size(stack_b) * 0.7
 			&& ft_lstsize(stack_a) < ft_lstsize(stack_b))

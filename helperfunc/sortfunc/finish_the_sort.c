@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 23:50:14 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/07 20:12:34 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:22:51 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,42 @@
 // 	printf("\n");
 // }
 
+int	find_pos(t_list **stack_a, int min)
+{
+	t_list	*tmp;
+	int		pos;
+
+	tmp = *stack_a;
+	pos = 0;
+	while (tmp && tmp->next)
+	{
+		if (tmp->value == min)
+			return (pos);
+		pos++;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	bottom_a_value;
 	int	median_a;
 	int	back_pos;
-	int	flag;
 
 	bottom_a_value = mv_last(*stack_a)->value;
 	median_a = find_median(stack_a);
+	// print_stacks(stack_a, stack_b);
+	// printf("median_a: %d\n", median_a);
 	if ((*stack_b)->value < (*stack_a)->value)
 	{
+		// print_stacks(stack_a, stack_b);
 		while (*stack_b && (*stack_b)->value < (*stack_a)->value)
 			ft_pa(stack_a, stack_b);
 	}
 	else if ((*stack_b)->value > bottom_a_value)
 	{
+		// print_stacks(stack_a, stack_b);
 		back_pos = (*stack_a)->value;
 		while (*stack_b && (*stack_b)->value > bottom_a_value)
 			ft_pa(stack_a, stack_b);
@@ -59,22 +79,15 @@ void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 	}
 	else if (*stack_b && median_a > (*stack_b)->value)
 	{
+		// print_stacks(stack_a, stack_b);
 		back_pos = (*stack_a)->value;
-		flag = 0;
 		while ((*stack_b)->value > (*stack_a)->value)
-		{
 			ft_ra(stack_a);
-			flag++;
-		}
 		bottom_a_value = mv_last(*stack_a)->value;
 		while (*stack_b && (*stack_b)->value < (*stack_a)->value
 			&& bottom_a_value < (*stack_b)->value)
-		{
 			ft_pa(stack_a, stack_b);
-			flag--;
-		}
-		// print_stacks(stack_a, stack_b);
-		if (flag >= 0)
+		if (ft_lstsize(stack_a) > find_pos(stack_a, find_min_node(*stack_a)))
 		{
 			while (back_pos != (*stack_a)->value)
 				ft_ra(stack_a);
@@ -87,29 +100,26 @@ void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 	}
 	else if (*stack_b && median_a < (*stack_b)->value)
 	{
+		// print_stacks(stack_a, stack_b);
 		back_pos = (*stack_a)->value;
-		flag = 0;
-		while ((*stack_b)->value > (*stack_a)->value)
+		while ((*stack_b)->value < bottom_a_value)
 		{
 			ft_rra(stack_a);
-			flag++;
+			bottom_a_value = mv_last(*stack_a)->value;
 		}
 		bottom_a_value = mv_last(*stack_a)->value;
 		while (*stack_b && (*stack_b)->value < (*stack_a)->value
 			&& bottom_a_value < (*stack_b)->value)
-		{
 			ft_pa(stack_a, stack_b);
-			flag--;
-		}
-		if (flag >= 0)
+		if (ft_lstsize(stack_a) > find_pos(stack_a, find_min_node(*stack_a)))
 		{
 			while (back_pos != (*stack_a)->value)
-				ft_ra(stack_a);
+				ft_rra(stack_a);
 		}
 		else
 		{
 			while (back_pos != (*stack_a)->value)
-				ft_rra(stack_a);
+				ft_ra(stack_a);
 		}
 	}
 	if (*stack_b)

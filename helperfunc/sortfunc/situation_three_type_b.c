@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/07 20:13:29 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:25:03 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	situation_three_type_b(t_list **stack_a, t_list **stack_b,
 		ft_ra(stack_a);
 		ft_pb(stack_a, stack_b);
 	}
-	while ((*stack_b)->value != ini_pos_b)
+	while (ft_lstsize(stack_a) > 3 && !is_sorted(stack_a)
+		&& (*stack_b)->value != ini_pos_b)
 	{
 		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value)
 			flag = add_stacka_typeb(stack_a, stack_b, (*stack_b)->value,
