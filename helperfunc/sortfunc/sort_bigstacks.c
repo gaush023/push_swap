@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 03:51:11 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/08 18:47:42 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:38:19 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@
 static void	situation_one(t_list **stack_a, t_list **stack_b)
 {
 	if (!*stack_b)
+	{
 		ft_pb(stack_a, stack_b);
+		return ;
+	}
 	while (ft_lstsize(stack_a) > 3
 		&& (*stack_a)->next->value > (*stack_b)->value)
 	{
@@ -65,7 +68,6 @@ static void	situation_one(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(stack_a) > 3 && (*stack_a)->value > (*stack_b)->value)
 	{
 		ft_pb(stack_a, stack_b);
-		return ;
 	}
 }
 
@@ -83,9 +85,9 @@ static void	do_the_sort(t_list **stack_a, t_list **stack_b)
 		tmp_b = *stack_b;
 		bottom_b_value = (mv_last(tmp_b))->value;
 	}
-	if ((*stack_a)->value < (*stack_a)->next->value
-		&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
-		ft_sa(stack_a);
+	// if ((*stack_a)->value < (*stack_a)->next->value
+	// 	&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
+	// 	ft_sa(stack_a);
 	if (!*stack_b || (*stack_a)->value > (*stack_b)->value)
 		situation_one(stack_a, stack_b);
 	else if ((*stack_a)->value < bottom_b_value)
@@ -99,6 +101,7 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 	while (ft_lstsize(stack_a) > 3 && !is_sorted(stack_a))
 	{
 		do_the_sort(stack_a, stack_b);
+		// print_stacks(stack_a, stack_b);
 		// if (!is_reverse_sorted(stack_b))
 		// 	return (print_stacks(stack_a, stack_b));
 	}
@@ -107,5 +110,5 @@ void	sort_bigstacks(t_list **stack_a, t_list **stack_b)
 	finish_the_sort(stack_a, stack_b);
 	// printf("\n======\nfinish the sort\n======\n");
 	// printf("\n======\nfinish\n======\n");
-	// print_stacks(stack_a, stack_b);
+	//
 }

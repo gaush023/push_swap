@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 23:38:54 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/08 19:23:31 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/11 09:51:20 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	situation_two(t_list **stack_a, t_list **stack_b, int bottom_b_value)
 	while (initial_pos != (*stack_b)->value && ft_lstsize(stack_a) > 3
 		&& !is_sorted(stack_a))
 	{
-		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value)
+		if (median > (*stack_a)->value && (*stack_a)->value > (*stack_b)->value
+			&& ft_lstsize(stack_a) < ft_lstsize(stack_b))
 			flag = add_stacka_typeb(stack_a, stack_b, (*stack_b)->value,
 					median);
 		if (flag == 1)

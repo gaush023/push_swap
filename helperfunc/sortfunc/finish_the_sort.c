@@ -6,7 +6,7 @@
 /*   By: sagemura <sagemura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 23:50:14 by sagemura          #+#    #+#             */
-/*   Updated: 2023/11/08 19:22:51 by sagemura         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:21:30 by sagemura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 		if (ft_lstsize(stack_a) > find_pos(stack_a, find_min_node(*stack_a)))
 		{
 			while (back_pos != (*stack_a)->value)
-				ft_ra(stack_a);
+				ft_rra(stack_a);
 		}
 		else
 		{
 			while (back_pos != (*stack_a)->value)
-				ft_rra(stack_a);
+				ft_ra(stack_a);
 		}
 	}
 	else if (*stack_b && median_a < (*stack_b)->value)
@@ -114,12 +114,12 @@ void	finish_the_sort(t_list **stack_a, t_list **stack_b)
 		if (ft_lstsize(stack_a) > find_pos(stack_a, find_min_node(*stack_a)))
 		{
 			while (back_pos != (*stack_a)->value)
-				ft_rra(stack_a);
+				ft_ra(stack_a);
 		}
 		else
 		{
 			while (back_pos != (*stack_a)->value)
-				ft_ra(stack_a);
+				ft_rra(stack_a);
 		}
 	}
 	if (*stack_b)
